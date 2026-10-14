@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creative Writing – Mid-Term Test</title>
+<style>
+:root{--ink:#1d2b2a;--mute:#5b6b69;--paper:#fffefb;--bg:#eef3f0;--line:#d5dfda;--brand:#1f6f5c;--brand-d:#154d40;--sun:#f2b632;--ok:#1b7f4b;--okbg:#e3f5ea;--bad:#b3322b;--badbg:#fde9e7;--warn:#8a6100;--warnbg:#fff3d1}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Trebuchet MS","Segoe UI",system-ui,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 60px}
+header.top{background:var(--brand);color:#fff;border-bottom:6px solid var(--sun)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:20px 16px;flex-wrap:wrap}
+h1{margin:0;font:700 1.7rem/1.2 Georgia,"Times New Roman",serif}
+.sub{opacity:.85;font-size:.95rem}
+.timer{background:rgba(255,255,255,.15);padding:6px 14px;border-radius:99px;font-variant-numeric:tabular-nums;font-weight:700}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:22px;margin-top:18px}
+.meta{display:grid;grid-template-columns:2fr 1fr;gap:14px}
+label.f{display:block;font-size:.85rem;font-weight:700;color:var(--mute);margin-bottom:4px}
+.meta input{width:100%;font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:8px;background:#fff}
+.meta input:focus,.blank:focus{outline:3px solid #9fd6c6;border-color:var(--brand)}
+.instr{border-left:5px solid var(--sun);background:var(--warnbg);padding:12px 16px;border-radius:0 8px 8px 0;margin:0}
+.bank{position:sticky;top:0;z-index:5;background:var(--paper);border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;padding:12px 16px;box-shadow:0 6px 12px -8px rgba(0,0,0,.25)}
+.bank b{display:block;font-size:.85rem;color:var(--mute);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:.9rem;border:2px solid var(--brand);background:#fff;color:var(--brand-d);padding:2px 11px;border-radius:99px;cursor:pointer}
+.chip:hover{background:var(--brand);color:#fff}
+.part{margin-top:22px}
+.part h2{margin:0 0 8px;font:700 1.05rem Georgia,serif;color:var(--brand-d);display:flex;justify-content:space-between;border-bottom:2px solid var(--line);padding-bottom:4px}
+.part h2 span{font:600 .85rem "Trebuchet MS",sans-serif;color:var(--mute)}
+.passage{font-size:1.15rem;line-height:2.5;margin:0}
+.blank{font:inherit;font-weight:700;color:var(--brand-d);border:0;border-bottom:2px solid var(--ink);background:#f4f9f7;padding:0 6px;text-align:center;border-radius:4px 4px 0 0;max-width:100%}
+.blank.ok{border-color:var(--ok);background:var(--okbg);color:var(--ok)}
+.blank.no{border-color:var(--bad);background:var(--badbg);color:var(--bad)}
+.fix{font-size:.8rem;color:var(--ok);font-weight:700;background:var(--okbg);padding:1px 7px;border-radius:99px;margin-left:3px;white-space:nowrap}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+button.btn{font:700 1rem inherit;font-family:inherit;border:0;border-radius:8px;padding:13px 30px;cursor:pointer;background:var(--brand);color:#fff}
+button.btn:hover{background:var(--brand-d)}
+button.alt{background:#fff;color:var(--brand-d);border:2px solid var(--brand)}
+button.alt:hover{background:var(--okbg)}
+.status{text-align:center;color:var(--mute);font-size:.9rem;margin-top:8px}
+#result{display:none}
+.hero{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.ring{width:140px;height:140px;position:relative;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 1.9rem Georgia,serif;line-height:1.1}
+.ring small{font:600 .8rem "Trebuchet MS",sans-serif;color:var(--mute)}
+.grade{display:inline-block;font:700 1.1rem Georgia,serif;padding:2px 14px;border-radius:6px;background:var(--brand);color:#fff;margin-right:8px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:16px}
+.fact{background:var(--bg);border-radius:8px;padding:10px;text-align:center}
+.fact b{display:block;font-size:1.35rem}.fact span{font-size:.8rem;color:var(--mute)}
+.bar{height:12px;background:var(--line);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--brand)}
+.sec{display:grid;grid-template-columns:1fr 150px 60px;gap:12px;align-items:center;margin:10px 0}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--bg);font-size:.8rem;color:var(--mute)}
+td.n,th.n{text-align:center}
+.tag{font-weight:700;border-radius:99px;padding:1px 10px;font-size:.8rem;white-space:nowrap}
+.t-ok{background:var(--okbg);color:var(--ok)}.t-no{background:var(--badbg);color:var(--bad)}.t-bl{background:var(--warnbg);color:var(--warn)}
+h3{font:700 1.15rem Georgia,serif;margin:0 0 10px}
+.scroll{overflow-x:auto}
+dialog{border:0;border-radius:12px;padding:24px;max-width:400px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+@media(max-width:560px){.meta{grid-template-columns:1fr}.passage{line-height:2.6}.sec{grid-template-columns:1fr 90px 46px}}
+@media print{body{background:#fff}header.top .timer,.bank,#test,.actions,dialog{display:none!important}#result{display:block!important}.card{break-inside:avoid;border:1px solid #999}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div><h1>Mid-Term Test</h1><div class="sub">Subject: Creative Writing</div></div>
+  <div class="timer" id="timer" aria-label="Time spent">00:00</div>
+</div></header>
+
+<main class="wrap">
+<section id="test">
+  <div class="card">
+    <div class="meta">
+      <div><label class="f" for="sname">Name</label><input id="sname" type="text" autocomplete="off" placeholder="Write your full name"></div>
+      <div><label class="f" for="sdate">Date</label><input id="sdate" type="date"></div>
+    </div>
+    <p class="instr" style="margin-top:16px"><b>Instruction:</b> Complete the composition by filling in the blanks with the correct information about yourself. Tap a word in the word bank to place it in the blank you are on, or type your own answer.</p>
+  </div>
+  <div class="bank"><b>Word Bank</b><div class="chips" id="chips"></div></div>
+  <div class="card" id="paper" style="margin-top:14px"></div>
+  <div class="actions"><button class="btn" id="submit">Submit Test</button></div>
+  <div class="status" id="progress"></div>
+</section>
+
+<section id="result"></section>
+</main>
+
+<dialog id="dlg">
+  <h3 id="dlgT">Submit your test?</h3>
+  <p id="dlgP"></p>
+  <div class="actions" style="margin-top:14px">
+    <button class="btn alt" id="dNo">Keep working</button>
+    <button class="btn" id="dYes">Submit now</button>
+  </div>
+</dialog>
+
+<script>
+(function(){
+"use strict";
+/* ---------- ANSWER KEY (edit here) ----------
+   a: accepted answers (lowercase). type 'name'/'age' = any valid personal response. */
+var WORDS=["pupil","black","short","round","big","long","football","rice","dancing","fighting","full stop","capital","space","kind","happy","Port Harcourt","Olivewood School","brown","beautiful"];
+var PARTS=[
+ {t:"Part A: About Me",p:"My name is {1}. I am {2} years old. I am a {3}. I live in {4}. My school is called {5}."},
+ {t:"Part B: How I Look",p:"I have {6} eyes and {7} hair. My hair is {8}. I am {9} in height. I have a {10} face."},
+ {t:"Part C: My Likes and Dislikes",p:"I like {11} because it makes me happy. My favourite food is {12}. I also like {13}. However, I do not like {14}. I dislike {15}."},
+ {t:"Part D: How I Write",p:"When I write, I remember to begin my sentences with a {16}. I use a {17} at the end of a statement. I leave {18} between words. I always write neatly and use {19} letters where necessary."},
+ {t:"Part E: I Am Proud",p:"I am proud of myself because I am {20}."}
+];
+var Q={
+ 1:{c:"My name is …",type:"name",w:13},
+ 2:{c:"I am … years old",type:"age",w:5},
+ 3:{c:"I am a …",a:["pupil"],w:8},
+ 4:{c:"I live in …",a:["port harcourt","portharcourt"],w:13},
+ 5:{c:"My school is called …",a:["olivewood school","olivewood"],w:15},
+ 6:{c:"I have … eyes",a:["black","brown"],w:8},
+ 7:{c:"… hair",a:["black","brown"],w:8},
+ 8:{c:"My hair is …",a:["long","short"],w:8},
+ 9:{c:"I am … in height",a:["short"],w:8},
+ 10:{c:"I have a … face",a:["round","big","long","beautiful"],w:9},
+ 11:{c:"I like … because it makes me happy",a:["football","dancing","rice"],w:10},
+ 12:{c:"My favourite food is …",a:["rice"],w:8},
+ 13:{c:"I also like …",a:["football","dancing"],w:10},
+ 14:{c:"I do not like …",a:["fighting"],w:10},
+ 15:{c:"I dislike …",a:["fighting","football","dancing","rice"],w:10},
+ 16:{c:"Begin my sentences with a …",a:["capital"],w:9},
+ 17:{c:"I use a … at the end of a statement",a:["full stop","fullstop","period"],w:10},
+ 18:{c:"I leave … between words",a:["space","a space"],w:8},
+ 19:{c:"Use … letters where necessary",a:["capital"],w:9},
+ 20:{c:"I am proud because I am …",a:["kind","happy","beautiful"],w:10}
+};
+var SECTIONS=[["Part A: About Me",1,5],["Part B: How I Look",6,10],["Part C: Likes and Dislikes",11,15],["Part D: How I Write",16,19],["Part E: I Am Proud",20,20]];
+var NUMW="one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split(" ");
+var $=function(id){return document.getElementById(id)};
+var last=null,start=Date.now(),tick,done=false;
+
+/* build UI */
+$("sdate").value=new Date().toISOString().slice(0,10);
+WORDS.forEach(function(w){var b=document.createElement("button");b.type="button";b.className="chip";b.textContent=w;
+ b.addEventListener("mousedown",function(e){e.preventDefault()});
+ b.addEventListener("click",function(){var t=last||firstEmpty();if(t&&!done){t.value=w;t.dispatchEvent(new Event("input"));t.focus();}});
+ $("chips").appendChild(b)});
+var html="";
+PARTS.forEach(function(P){
+ var n=(P.p.match(/\{\d+\}/g)||[]).length;
+ html+='<div class="part"><h2>'+P.t+'<span>'+n+(n>1?' marks':' mark')+'</span></h2><p class="passage">'+
+ P.p.replace(/\{(\d+)\}/g,function(_,i){return '<input class="blank" id="q'+i+'" data-q="'+i+'" style="width:'+Q[i].w+'ch" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Blank '+i+': '+Q[i].c+'">'})+'</p></div>';
+});
+$("paper").innerHTML=html;
+var inputs=[].slice.call(document.querySelectorAll(".blank"));
+function firstEmpty(){for(var i=0;i<inputs.length;i++)if(!inputs[i].value.trim())return inputs[i];return null}
+inputs.forEach(function(i){i.addEventListener("focus",function(){last=i});i.addEventListener("input",prog)});
+function prog(){var f=inputs.filter(function(i){return i.value.trim()}).length;$("progress").textContent=f+" of "+inputs.length+" blanks filled"}
+prog();
+tick=setInterval(function(){$("timer").textContent=fmt((Date.now()-start)/1000)},1000);
+function fmt(s){s=Math.floor(s);return ("0"+Math.floor(s/60)).slice(-2)+":"+("0"+s%60).slice(-2)}
+
+/* marking */
+function norm(s){return s.toLowerCase().replace(/[.,!?]/g," ").replace(/\s+/g," ").trim()}
+function mark(i,v){
+ var q=Q[i],n=norm(v);
+ if(!n)return "blank";
+ if(q.type==="name")return /[a-z]{2,}/.test(n)?"ok":"no";
+ if(q.type==="age"){var num=parseInt(n,10);return ((num>=3&&num<=20&&/^\d+$/.test(n))||(NUMW.indexOf(n)>=2))?"ok":"no"}
+ return q.a.indexOf(n)>-1?"ok":"no";
+}
+function esc(s){return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function expected(i){var q=Q[i];return q.type==="name"?"Any valid name":q.type==="age"?"A number from 3 to 20":q.a.filter(function(x,k,arr){return x!=="portharcourt"&&x!=="fullstop"&&x!=="a space"&&x!=="period"&&x!=="olivewood"}).join(" / ")}
+
+/* submit flow */
+$("submit").addEventListener("click",function(){
+ if(!$("sname").value.trim()){$("sname").focus();$("sname").scrollIntoView({block:"center"});$("progress").textContent="Please write your name at the top before submitting.";return}
+ var empty=inputs.filter(function(i){return !i.value.trim()}).length;
+ $("dlgP").textContent=empty?("You have "+empty+" empty "+(empty>1?"blanks":"blank")+". You cannot change answers after submitting."):"You cannot change your answers after submitting.";
+ $("dlg").showModal();
+});
+$("dNo").onclick=function(){$("dlg").close()};
+$("dYes").onclick=function(){$("dlg").close();finish()};
+
+function finish(){
+ done=true;clearInterval(tick);
+ var secs=(Date.now()-start)/1000,rows=[],score=0,c=0,w=0,b=0;
+ inputs.forEach(function(el){
+  var i=+el.dataset.q,r=mark(i,el.value);el.readOnly=true;
+  el.className="blank "+(r==="ok"?"ok":"no");
+  if(r==="ok"){score++;c++}else{r==="blank"?b++:w++;
+   var s=document.createElement("span");s.className="fix";s.textContent=expected(i).split(" / ")[0];el.after(s)}
+  rows.push({i:i,r:r,v:el.value.trim()});
+ });
+ var total=inputs.length,pct=Math.round(score/total*100);
+ var g=pct>=80?["A","Excellent work! Keep it up."]:pct>=70?["B","Very good! You are doing well."]:pct>=60?["C","Good effort. A little more practice will help."]:pct>=50?["D","Fair. Revise the word bank and try again."]:pct>=40?["E","You need more practice. Do not give up."]:["F","Keep practising. Ask your teacher for help."];
+ var R=2*Math.PI*60,off=R*(1-pct/100);
+ var h='<div class="card"><div class="hero"><div class="ring"><svg width="140" height="140"><circle cx="70" cy="70" r="60" fill="none" stroke="#d5dfda" stroke-width="12"/><circle cx="70" cy="70" r="60" fill="none" stroke="#1f6f5c" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+R+'" stroke-dashoffset="'+off+'"/></svg><div>'+pct+'%<small>'+score+' / '+total+'</small></div></div>'+
+ '<div style="flex:1;min-width:220px"><h3 style="margin-bottom:4px">Score Sheet</h3><div><b>'+esc($("sname").value.trim())+'</b></div><div class="sub" style="color:var(--mute)">Creative Writing: Mid-Term Test &nbsp;|&nbsp; '+esc($("sdate").value)+'</div><p style="margin:10px 0 0"><span class="grade">Grade '+g[0]+'</span>'+g[1]+'</p></div></div>'+
+ '<div class="facts"><div class="fact"><b style="color:var(--ok)">'+c+'</b><span>Correct</span></div><div class="fact"><b style="color:var(--bad)">'+w+'</b><span>Wrong</span></div><div class="fact"><b style="color:var(--warn)">'+b+'</b><span>Not answered</span></div><div class="fact"><b>'+fmt(secs)+'</b><span>Time taken</span></div></div></div>';
+ h+='<div class="card"><h3>Performance by Part</h3>';
+ SECTIONS.forEach(function(s){var t=s[2]-s[1]+1,got=rows.filter(function(x){return x.i>=s[1]&&x.i<=s[2]&&x.r==="ok"}).length;
+  h+='<div class="sec"><span>'+s[0]+'</span><div class="bar"><i style="width:'+got/t*100+'%"></i></div><b>'+got+' / '+t+'</b></div>'});
+ h+='</div><div class="card"><h3>Marking Breakdown</h3><p style="margin-top:0;color:var(--mute);font-size:.9rem">Each blank carries 1 mark. Total: '+total+' marks.</p><div class="scroll"><table><thead><tr><th class="n">No.</th><th>Sentence</th><th>Your answer</th><th>Correct answer</th><th class="n">Mark</th><th>Result</th></tr></thead><tbody>';
+ rows.forEach(function(x){
+  var t=x.r==="ok"?'<span class="tag t-ok">Correct</span>':x.r==="no"?'<span class="tag t-no">Wrong</span>':'<span class="tag t-bl">Blank</span>';
+  h+='<tr><td class="n">'+x.i+'</td><td>'+esc(Q[x.i].c)+'</td><td>'+(x.v?esc(x.v):'<i style="color:var(--mute)">No answer</i>')+'</td><td>'+esc(expected(x.i))+'</td><td class="n"><b>'+(x.r==="ok"?1:0)+'</b> / 1</td><td>'+t+'</td></tr>'});
+ h+='<tr><td></td><td colspan="3"><b>Total</b></td><td class="n"><b>'+score+' / '+total+'</b></td><td><b>'+pct+'%</b></td></tr></tbody></table></div></div>'+
+ '<div class="card"><h3>Your Marked Composition</h3><div id="marked"></div></div>'+
+ '<div class="actions"><button class="btn" id="print">Print / Save as PDF</button><button class="btn alt" id="retake">Retake Test</button></div>';
+ $("result").innerHTML=h;
+ $("marked").appendChild($("paper").cloneNode(true)).removeAttribute("id");
+ $("result").style.display="block";$("test").style.display="none";
+ window.scrollTo({top:0,behavior:"smooth"});
+ $("print").onclick=function(){window.print()};
+ $("retake").onclick=function(){location.reload()};
+}
+})();
+</script>
+</body>
+</html>
